@@ -7,7 +7,7 @@ if(developMode){
 } else{
 	require.config({
 		  paths: {
-				'Cesium': '../../../../Build/Cesium/Cesium',
+				'Cesium': '../../Build/Cesium/Cesium',
 				'Sensor': './Sensor'
 		  },
 		  shim: {
