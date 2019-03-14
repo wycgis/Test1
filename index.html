@@ -1,0 +1,70 @@
+<!--
+	How to load an image with SingleTileImageryProvider,
+	it is useful especially when the quality of network is so poor
+-->
+<!DOCTYPE html>
+<head>
+    <title>LocalImage</title>
+    <link href="../../Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+	<script type="text/javascript" src="./src/lib/require.min.js" data-main="./src/js/main"></script>
+	<style>
+        html, body, #cesiumContainer {
+            width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="cesiumContainer"></div>
+<script>
+    function onload(Cesium) {
+        		
+		var viewer = new Cesium.Viewer('cesiumContainer',{
+				imageryProvider: Cesium.createTileMapServiceImageryProvider({
+	            url: './data/Map'
+	        }),
+				animation : false,
+				baseLayerPicker : false,
+				fullscreenButton : false,
+				vrButton : false,
+				geocoder : false,
+				homeButton : false,
+				infoBox : false,
+				sceneModePicker : false,
+				timeline : false,
+				navigationInstructionsInitiallyVisible : false,
+				scene3DOnly : false,
+				navigationHelpButton:false
+			});
+			
+		viewer._cesiumWidget._creditContainer.style.display="none";
+
+		var scene = viewer.scene;
+	    var primitives = scene.primitives;
+	    var camera = scene.camera;
+
+	    var position = Cesium.Cartesian3.fromDegrees(Math.random(), Math.random());
+	    var entity = viewer.entities.add({
+	        position: position,
+	        billboard: {
+	            scale: 1,
+	            image: './facility.gif',
+	            horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+	            verticalOrigin: Cesium.VerticalOrigin.CENTER
+	        },
+	        rectangularSensor: new Cesium.RectangularSensorGraphics({
+	            //gaze: targetEntity,
+	            radius: 1000000,
+	            xHalfAngle: Cesium.Math.toRadians(45),
+	            yHalfAngle: Cesium.Math.toRadians(45),
+	            lineColor: new Cesium.Color(0.0, 1.0, 1.0, 1.0),
+	            material: new Cesium.Color(0.0, 1.0, 1.0, 0.4),
+	            showScanPlane: true,
+	            scanPlaneColor: new Cesium.Color(0.0, 1.0, 1.0, 1.0),
+	            scanPlaneMode: 'vertical',
+	            scanPlaneRate: 3,
+
+	        })
+	    });
+    };
+</script>
+</body>

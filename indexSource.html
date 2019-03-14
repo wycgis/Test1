@@ -1,0 +1,42 @@
+<!--
+	How to load an image with SingleTileImageryProvider,
+	it is useful especially when the quality of network is so poor
+-->
+<!DOCTYPE html>
+<head>
+    <title>LocalImage</title>
+    <link href="../../Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+	<script type="text/javascript" src="./src/lib/require.min.js" data-main="./src/js/main1"></script>
+	<style>
+        html, body, #cesiumContainer {
+            width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="cesiumContainer"></div>
+<script>
+    function onload(Cesium) {
+        		
+		var viewer = new Cesium.Viewer('cesiumContainer',{
+				imageryProvider: Cesium.createTileMapServiceImageryProvider({
+	            url: './data/Map'
+	        }),
+				animation : false,
+				baseLayerPicker : false,
+				fullscreenButton : false,
+				vrButton : false,
+				geocoder : false,
+				homeButton : false,
+				infoBox : false,
+				//sceneModePicker : false,
+				timeline : false,
+				navigationInstructionsInitiallyVisible : false,
+				scene3DOnly : false,
+				navigationHelpButton:false
+			});
+			
+		viewer._cesiumWidget._creditContainer.style.display="none";
+    };
+</script>
+</body>
